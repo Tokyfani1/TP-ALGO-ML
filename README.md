@@ -14,5 +14,11 @@ explication brève:
   
   Le travail combine algorithmique (A* pour la résolution optimale) et développement graphique (pygame) pour créer une application de puzzle interactif, avec des options de jeu manuel ou automatique.
 
+  Contribution des membres du groupe:
+  pour la partie frontend: Njaka, Onja
+  pour la partie back:
+    -pour le choix de puzzle et de k et echange de 2 tuiles :Toky
+    -pour la partie solver:Andy,Frederic, Andraina
+
 
   
