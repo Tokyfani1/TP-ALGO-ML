@@ -2,7 +2,7 @@
 Projet tp ml/algo
 nom du groupe:solid team
 explication brève:
-  Ce projet consiste à créer un jeu de puzzle à glissement (8-puzzle et 15-puzzle) en Python à l'aide de pygame. Le joueur doit déplacer les tuiles numérotées pour organiser la grille dans l'ordre correct, avec une case vide représentant le "0".
+  Ce projet consiste à créer un jeu de puzzle à glissement (8-puzzle et 15-puzzle) en Python à l'aide de pygame. Le joueur doit déplacer les tuiles numérotées pour organiser la grille dans l'ordre correct, avec une case vide.
   
   Fonctions principales :
   Interface graphique : Le jeu utilise pygame pour afficher la grille du puzzle et gérer les interactions. Les tuiles sont dessinées et mises à jour à chaque mouvement.
@@ -20,5 +20,6 @@ explication brève:
     -pour le choix de puzzle et de k et echange de 2 tuiles :Toky
     -pour la partie solver:Andy,Frederic, Andraina
 
+pour la partie c, il y a deux fichiers "partiecfinal" et "partiefinalprime". On a eu 2 fichiers car on n'a pas pu integrer les fonctionnalités de la partie A et de la partie B dans "partiecfinal",cependant la fonctionnalité de resolution automatique du puzzle 4*4 est dans "partiecfinal" . "partiecfinalprime" contient tout les fonctionnalités requises autre la resolution automatique du puzzle 4*4
 
   
