@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title>Fanorona - Jeu de stratégie malgache</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #b8c1ec;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #fff;
+            background: #e94560;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1rem;
+            animation: fadeInUp 1s ease-out 1s backwards;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+
+        .game-preview {
+            width: 300px;
+            height: 300px;
+            background: #ffffff15;
+            border-radius: 10px;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out 1.5s backwards;
+        }
+
+        .piece {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.5s ease;
+        }
+
+        .player1 {
+            background: #e94560;
+        }
+
+        .player2 {
+            background: #0f3460;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .rules {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #ffffff10;
+            border-radius: 10px;
+            animation: fadeIn 1s ease-out 2s backwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fanorona</h1>
+        <p class="subtitle">Découvrez ce jeu de stratégie traditionnel malgache</p>
+        
+        <div class="game-preview" id="gamePreview"></div>
+        
+        <a href="puzzle.html" class="btn">Jouer maintenant</a>
+        <a href="./RegleJeux.html" class="btn" >Règles du jeu</a>
+
+        <div class="rules" id="rules" style="display: none;">
+            <h2>Comment jouer</h2>
+            <p>Le Fanorona est un jeu de stratégie où deux joueurs s'affrontent sur un plateau. 
+            Le but est de capturer toutes les pièces de l'adversaire en utilisant des mouvements 
+            d'approche ou de retrait.</p>
+        </div>
+    </div>
+
+    <script>
+        // Animation des pièces dans la prévisualisation
+        const gamePreview = document.getElementById('gamePreview');
+        const pieces = [];
+        const numPieces = 10;
+
+        function createPiece(isPlayer1) {
+            const piece = document.createElement('div');
+            piece.className = `piece ${isPlayer1 ? 'player1' : 'player2'}`;
+            piece.style.left = Math.random() * 280 + 'px';
+            piece.style.top = Math.random() * 280 + 'px';
+            gamePreview.appendChild(piece);
+            return piece;
+        }
+
+        // Créer les pièces initiales
+        for (let i = 0; i < numPieces; i++) {
+            pieces.push(createPiece(i < numPieces/2));
+        }
+
+        // Animer les pièces
+        function animatePieces() {
+            pieces.forEach(piece => {
+                piece.style.left = Math.random() * 280 + 'px';
+                piece.style.top = Math.random() * 280 + 'px';
+            });
+        }
+
+        setInterval(animatePieces, 2000);
+
+        // Gestion de l'affichage des règles
+        const rulesBtn = document.getElementById('rulesBtn');
+        const rules = document.getElementById('rules');
+
+        rulesBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            rules.style.display = rules.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>

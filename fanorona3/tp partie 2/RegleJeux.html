@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règles du Jeu Fanorona</title>
+  <style>
+     /* styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: scale(1.02);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #4CAF50;
+}
+
+#game-board canvas {
+  border: 2px solid #4CAF50;
+  margin: 20px auto;
+  display: block;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#rules {
+  margin-top: 20px;
+}
+
+#rules h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #4CAF50;
+}
+
+#rules ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+footer a {
+  color: #4CAF50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #2E7D32;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.container {
+  animation: fadeIn 1s ease-in-out;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Règles du Jeu Fanorona</h1>
+    </header>
+
+    <section id="game-board">
+      <canvas id="board" width="400" height="400"></canvas>
+    </section>
+
+    <section id="rules">
+      <h2>Comment jouer ?</h2>
+      <ol>
+        <li><strong>Plateau de jeu :</strong> Le jeu se déroule sur un plateau 3x3 avec des lignes horizontales, verticales et diagonales.</li>
+        <li><strong>Placement initial :</strong> Chaque joueur dispose de 3 pièces qu'il doit placer sur les intersections libres du plateau.</li>
+        <li><strong>Objectif :</strong> Aligner 3 pièces de suite le long d'une ligne (horizontale, verticale ou diagonale).</li>
+        <li><strong>Déplacement :</strong> Une fois toutes les pièces placées, les joueurs se relaient pour déplacer leurs pièces d'une intersection à une autre adjacente.</li>
+        <li><strong>Gagner :</strong> Le premier joueur à aligner 3 pièces gagne la partie.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <p><a href="./index.html">Retour</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // script.js
+
+// Dessiner le plateau de jeu Fanorona
+const canvas = document.getElementById('board');
+const ctx = canvas.getContext('2d');
+
+// Dimensions du plateau
+const size = 400;
+const cellSize = size / 3;
+
+// Fonction pour dessiner le plateau
+function drawBoard() {
+  // Fond blanc
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, size, size);
+
+  // Lignes horizontales et verticales
+  for (let i = 1; i < 3; i++) {
+    const offset = i * cellSize;
+
+    // Horizontales
+    ctx.beginPath();
+    ctx.moveTo(0, offset);
+    ctx.lineTo(size, offset);
+    ctx.strokeStyle = '#4CAF50';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Verticales
+    ctx.beginPath();
+    ctx.moveTo(offset, 0);
+    ctx.lineTo(offset, size);
+    ctx.stroke();
+  }
+
+  // Lignes diagonales
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(size, size);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(0, size);
+  ctx.lineTo(size, 0);
+  ctx.stroke();
+
+  // Points d'intersection
+  for (let x = 0; x <= size; x += cellSize) {
+    for (let y = 0; y <= size; y += cellSize) {
+      ctx.beginPath();
+      ctx.arc(x, y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#4CAF50';
+      ctx.fill();
+    }
+  }
+}
+
+// Appeler la fonction pour dessiner le plateau
+drawBoard();
+
+// Animation des points d'intersection
+function animatePoints() {
+  const points = [];
+  for (let x = 0; x <= size; x += cellSize) {
+    for (let y = 0; y <= size; y += cellSize) {
+      points.push({ x, y });
+    }
+  }
+
+  let index = 0;
+
+  function animate() {
+    if (index >= points.length) return;
+
+    const point = points[index];
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = index % 2 === 0 ? '#FFC107' : '#4CAF50';
+    ctx.fill();
+
+    index++;
+    if (index < points.length) {
+      setTimeout(animate, 200);
+    }
+  }
+
+  animate();
+}
+
+// Lancer l'animation après un délai
+setTimeout(animatePoints, 1000);
+  </script>
+</body>
+</html>

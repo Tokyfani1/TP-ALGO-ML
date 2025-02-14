@@ -1,0 +1,35 @@
+.position {
+    position: absolute;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.top {
+    top: -25px;
+}
+
+.mid {
+    top: 125px;
+}
+
+.bottom {
+    bottom: -25px;
+}
+
+.left {
+    left: -25px;
+}
+
+.center {
+    left: 125px;
+}
+
+.right {
+    right: -25px;
+}
+
+.position:hover {
+    background-color: gray;
+}

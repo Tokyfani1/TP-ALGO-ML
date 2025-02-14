@@ -1,0 +1,31 @@
+.p1 {
+    background-color: rgb(149, 88, 151);
+}
+
+.p2 {
+    background-color: rgb(53, 133, 133);
+}
+
+.highlight {
+    background-color: rgb(190, 187, 187);
+}
+
+.active-p1 {
+    background-color: rgb(124, 0, 0);
+}
+
+.active-p2 {
+    background-color: rgb(0, 0, 94);
+}
+
+.player1 {
+    color: black;
+}
+
+.player2 {
+    color: black;
+}
+
+.moving {
+    color: black;
+}
